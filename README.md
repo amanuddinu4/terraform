@@ -1,41 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-</head>
-<body>
-    <header>
-        <h1>Provisioning Docker Resources Using Terraform</h1>
-        <p>Complete documentation for managing Docker resources with Terraform.</p>
-    </header>
+<header>Introduction</header>
+Terraform is an Infrastructure as Code (IaC) tool that allows you to manage and provision resources in a declarative manner. In this guide, we will use Terraform to provision a local Docker container running the Nginx web server.
+Prerequisites
+Before starting, ensure the following are installed:
+Terraform
+Docker
 
-    <main>
-        <section id="prerequisites">
-            <h2>Prerequisites</h2>
-            <ul>
-                <li><strong>Terraform</strong>: Download from <a href="https://www.terraform.io/downloads" target="_blank">here</a>.</li>
-                <li><strong>Docker</strong>: Install from <a href="https://docs.docker.com/get-docker/" target="_blank">Docker's official website</a>.</li>
-                <li><strong>Text Editor</strong>: Visual Studio Code or any code editor.</li>
-            </ul>
-        </section>
-
-        <section id="steps">
-            <h2>Steps to Provision Docker Resources</h2>
-
-            <h3>Step 1: Set Up Terraform</h3>
-            <ol>
-                <li>Create a new directory for the project:
-                    <pre><code>mkdir terraform-docker-project
-cd terraform-docker-project</code></pre>
-                </li>
-                <li>Create a file named <code>main.tf</code> in the directory.</li>
-            </ol>
-
-            <h3>Step 2: Write Your Terraform Configuration</h3>
-            <p>Add the following content to <code>main.tf</code>:</p>
-            <pre><code>
+Step-by-Step Guide
+Write Your Terraform Configuration
+Open main.tf and define the configuration:
+# Specify the Terraform provider for Docker
 terraform {
   required_providers {
     docker = {
@@ -47,11 +20,13 @@ terraform {
 
 provider "docker" {}
 
+# Define the Docker image
 resource "docker_image" "nginx_image" {
   name         = "nginx:latest"
   keep_locally = false
 }
 
+# Create a Docker container
 resource "docker_container" "nginx_container" {
   name  = "nginx_server"
   image = docker_image.nginx_image.name
@@ -60,46 +35,33 @@ resource "docker_container" "nginx_container" {
     external = 8080
   }
 }
-            </code></pre>
+<h1>Provision a local Docker container using Terraform</h1>
 
-            <h3>Step 3: Initialize Terraform</h3>
-            <p>Run the following command to initialize Terraform:</p>
-            <pre><code>terraform init</code></pre>
+Initialize Terraform
+In your terminal, run:
+terraform init
+This command initializes the working directory and downloads the required Docker provider.
 
-            <h3>Step 4: Plan Your Deployment</h3>
-            <p>Preview changes Terraform will apply:</p>
-            <pre><code>terraform plan</code></pre>
+Plan Your Deployment
+Preview the changes Terraform will apply:
+terraform plan
+Terraform will generate a plan that shows the resources it will create.
 
-            <h3>Step 5: Apply the Configuration</h3>
-            <p>Provision resources by running:</p>
-            <pre><code>terraform apply</code></pre>
-            <p>Type "yes" when prompted to confirm.</p>
+Apply the Configuration
+Provision the resources
+terraform apply
+Type "yes" when prompted to confirm. Terraform will create the Docker image and container.
 
-            <h3>Step 6: Verify the Deployment</h3>
-            <p>Check running containers:</p>
-            <pre><code>docker ps</code></pre>
+Verify the Deployment
+Check if the Docker container is running:
+docker ps
+You should see the container named nginx_Server running.
 
-            <p>Access the Nginx server in your browser at:</p>
-            <p><code>http://localhost:8080</code></p>
-        </section>
+Verification in Browser
+If you're running Terraform locally, access the Nginx server in your browser:
+URL: http://localhost:8080
 
-        <section id="troubleshooting">
-            <h2>Troubleshooting</h2>
-            <ul>
-                <li>
-                    <strong>Error: Docker Daemon Not Running</strong>: Start Docker with:
-                    <pre><code>
-sudo systemctl start docker
-sudo systemctl enable docker
-                    </code></pre>
-                </li>
-                <li>
-                    <strong>Permission Issues</strong>: Add your user to the Docker group:
-                    <pre><code>sudo usermod -aG docker $USER</code></pre>
-                    <p>Log out and log back in to apply changes.</p>
-                </li>
-            </ul>
-        </section>
-    </main>
-</body>
-</html>
+Notes
+Ports:Internal port 80 maps to external port 8080 on your machine.
+Container Management: You can manage containers using Docker commands (docker stop,docker rm, etc.).
+Logs: Use docker logs nginx_server to view container logs.
