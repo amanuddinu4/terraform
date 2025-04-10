@@ -14,7 +14,7 @@ Write Your Terraform Configuration<br>
 
 Open main.tf and define the configuration:<br>
 
-#Specify the Terraform provider for Docker<br>
+#Specify the Terraform provider for Docker<br><br>
 terraform {<br>
   required_providers {<br>
     docker = {<br>
@@ -26,13 +26,13 @@ terraform {<br>
 
 provider "docker" {}<br>
 
- #Define the Docker image<br>
+ #Define the Docker image<br><br>
 resource "docker_image" "nginx_image" {<br>
   name         = "nginx:latest"<br>
   keep_locally = false<br>
 }<br>
 
-#Create a Docker container<br>
+#Create a Docker container<br><br>
 resource "docker_container" "nginx_container" {<br>
   name  = "nginx_server"<br>
   image = docker_image.nginx_image.name<br>
