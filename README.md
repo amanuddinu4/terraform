@@ -1,80 +1,80 @@
-# Introduction
+# Introduction<br>
 
-Terraform is an Infrastructure as Code (IaC) tool that allows you to manage and provision resources in a declarative manner.We will use Terraform to provision a local Docker container running the Nginx web server.
+Terraform is an Infrastructure as Code (IaC) tool that allows you to manage and provision resources in a declarative manner.We will use Terraform to provision a local Docker container running the Nginx web server.<br>
 
-# Prerequisites
+# Prerequisites<br>
 
-Before starting, ensure the following are installed:
-Terraform
-Docker
+Before starting, ensure the following are installed:<br>
+Terraform<br>
+Docker<br>
 
-# Step-by-Step Guide
+# Step-by-Step Guide<br>
 
-Write Your Terraform Configuration
+Write Your Terraform Configuration<br>
 
-Open main.tf and define the configuration:
+Open main.tf and define the configuration:<br>
 
-#Specify the Terraform provider for Docker
-terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "~> 2.0"
-    }
-  }
-}
+#Specify the Terraform provider for Docker<br>
+terraform {<br>
+  required_providers {<br>
+    docker = {<br>
+      source  = "kreuzwerker/docker"<br>
+      version = "~> 2.0"<br>
+    }<br>
+  }<br>
+}<br>
 
-provider "docker" {}
+provider "docker" {}<br>
 
- #Define the Docker image
-resource "docker_image" "nginx_image" {
-  name         = "nginx:latest"
-  keep_locally = false
-}
+ #Define the Docker image<br>
+resource "docker_image" "nginx_image" {<br>
+  name         = "nginx:latest"<br>
+  keep_locally = false<br>
+}<br>
 
-#Create a Docker container
-resource "docker_container" "nginx_container" {
-  name  = "nginx_server"
-  image = docker_image.nginx_image.name
-  ports {
-    internal = 80
-    external = 8080
-  }
-}
+#Create a Docker container<br>
+resource "docker_container" "nginx_container" {<br>
+  name  = "nginx_server"<br>
+  image = docker_image.nginx_image.name<br>
+  ports {<br>
+    internal = 80<br>
+    external = 8080<br>
+  }<br>
+}<br>
 
-# Provision a local Docker container using Terraform
+# Provision a local Docker container using Terraform<br>
 
-Initialize Terraform
+Initialize Terraform<br>
 
-In your terminal, run:
-terraform init
-This command initializes the working directory and downloads the required Docker provider.
+In your terminal, run:<br>
+terraform init<br>
+This command initializes the working directory and downloads the required Docker provider.<br>
 
-Plan Your Deployment
+Plan Your Deployment<br>
 
-Preview the changes Terraform will apply:
-terraform plan
-Terraform will generate a plan that shows the resources it will create.
+Preview the changes Terraform will apply:<br>
+terraform plan<br>
+Terraform will generate a plan that shows the resources it will create.<br>
 
-Apply the Configuration
+Apply the Configuration<br>
 
-Provision the resources
-terraform apply
-Type "yes" when prompted to confirm. Terraform will create the Docker image and container.
+Provision the resources<br>
+terraform apply<br>
+Type "yes" when prompted to confirm. Terraform will create the Docker image and container.<br>
 
-# Verify the Deployment
+# Verify the Deployment<br>
 
-Check if the Docker container is running:
-docker ps
-You should see the container named nginx_Server running.
+Check if the Docker container is running:<br>
+docker ps<br>
+You should see the container named nginx_Server running.<br>
 
-# Verification in Browser
+# Verification in Browser<br>
 
-If you're running Terraform locally, access the Nginx server in your browser:
-URL: http://localhost:8080
+If you're running Terraform locally, access the Nginx server in your browser:<br>
+URL: http://localhost:8080<br>
 
-# Notes
+# Notes<br>
 
-Ports: Internal port 80 maps to external port 8080 on your machine.
-Container Management: You can manage containers using Docker commands (docker stop,docker rm, etc.).
-Logs: Use docker logs nginx_server to view container logs.
+Ports: Internal port 80 maps to external port 8080 on your machine.<br>
+Container Management: You can manage containers using Docker commands (docker stop,docker rm, etc.).<br>
+Logs: Use docker logs nginx_server to view container logs.<br>
