@@ -44,19 +44,19 @@ resource "docker_container" "nginx_container" {<br>
 
 # Provision a local Docker container using Terraform<br>
 
-Initialize Terraform<br>
+1) Initialize Terraform<br>
 
 In your terminal, run:<br><br>
     terraform init<br>
 This command initializes the working directory and downloads the required Docker provider.<br>
 
-Plan Your Deployment<br>
+2) Plan Your Deployment<br>
 
 Preview the changes Terraform will apply:<br><br>
   terraform plan<br>
 Terraform will generate a plan that shows the resources it will create.<br>
 
-Apply the Configuration<br>
+3) Apply the Configuration<br>
 
 Provision the resources<br><br>
   terraform apply<br>
