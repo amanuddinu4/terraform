@@ -15,9 +15,9 @@ Write Your Terraform Configuration<br>
 Open main.tf and define the configuration:<br>
 
 #Specify the Terraform provider for Docker<br><br>
-terraform {<br>
-  required_providers {<br>
-    docker = {<br>
+ terraform {<br>
+   required_providers {<br>
+     docker = {<br>
       source  = "kreuzwerker/docker"<br>
       version = "~> 2.0"<br>
     }<br>
@@ -46,26 +46,26 @@ resource "docker_container" "nginx_container" {<br>
 
 Initialize Terraform<br>
 
-In your terminal, run:<br>
-terraform init<br>
+In your terminal, run:<br><br>
+    terraform init<br>
 This command initializes the working directory and downloads the required Docker provider.<br>
 
 Plan Your Deployment<br>
 
-Preview the changes Terraform will apply:<br>
-terraform plan<br>
+Preview the changes Terraform will apply:<br><br>
+  terraform plan<br>
 Terraform will generate a plan that shows the resources it will create.<br>
 
 Apply the Configuration<br>
 
-Provision the resources<br>
-terraform apply<br>
+Provision the resources<br><br>
+  terraform apply<br>
 Type "yes" when prompted to confirm. Terraform will create the Docker image and container.<br>
 
 # Verify the Deployment<br>
 
-Check if the Docker container is running:<br>
-docker ps<br>
+Check if the Docker container is running:<br><br>
+   docker ps<br>
 You should see the container named nginx_Server running.<br>
 
 # Verification in Browser<br>
